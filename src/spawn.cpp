@@ -291,28 +291,26 @@ bool botInfo::GetPilotName(String name)
 
 void botInfo::LoadINI()
 {
-
 	std::ifstream file("AI.ini");
 	char line[256];
 	while (file.getline(line, 256))
 	{
 		if (CMPSTART("Ship=", line))
-			ship =  String(&line[5]).toInteger();
+			ship =  String(&line[5]).trim().toInteger();
 		else if (CMPSTART("Team=", line))
-			team =  String(&line[5]).toInteger();
+			team =  String(&line[5]).trim().toInteger();
 		else if (CMPSTART("X=", line))
-			x =  String(&line[2]).toInteger();
+			x =  String(&line[2]).trim().toInteger();
 		else if (CMPSTART("Y=", line))
-			y =  String(&line[2]).toInteger();
+			y =  String(&line[2]).trim().toInteger();
 		else if (CMPSTART("Active=", line))
-			active =  String(&line[7]).toInteger();
+			active =  String(&line[7]).trim().toInteger();
 		else if (CMPSTART("Shooting=", line))
-			shooting =  String(&line[9]).toInteger();
+			shooting =  String(&line[9]).trim().toInteger();
 		else if (CMPSTART("Spawnmode=", line))
-			spawnmode =  String(&line[10]).toInteger();
+			spawnmode =  String(&line[10]).trim().toInteger();
 		else if (CMPSTART("DodgePredHit=", line))
-			dodgenum =  String(&line[13]).toInteger();
-
+			dodgenum =  String(&line[13]).trim().toInteger();
 	}
 	file.close();
 }
