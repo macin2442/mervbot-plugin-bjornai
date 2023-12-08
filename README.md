@@ -1,8 +1,8 @@
-# MERVBot Plugin Template
+# Bjorn's AI MERVBot Plugin
 
 ## About
 
-This is an example bare-bones plugin for MERVBot without any function.
+This is an AI plugin for MERVBot originally written by Bjorn.
 
 ## Build Instructions
 
@@ -42,3 +42,6 @@ privileges of the player. `/!version` reports loaded plugins.
 
 For an exhaustive list of commands please check `build/Commands.txt` which
 can also be used for defining additional command aliases.
+
+The AI functionality can be configured in `cfg/AI.ini` which gets propagated
+to `build/AI.ini` when building the project.

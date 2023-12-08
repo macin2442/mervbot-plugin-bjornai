@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(mervbot-plugin-template VERSION 0.0.8 DESCRIPTION "A MERVBot plugin template")
+project(bjorn-ai VERSION 0.0.1 DESCRIPTION "Bjorn's AI MERVBot plugin")
 
 # the plugin author's e-mail (gets embedded into the bot's !version output)
-set(PROJECT_AUTHOR "cat02e@fsu.edu")
+set(PROJECT_AUTHOR "bjorn@djurner.net")
 
 # generate compile_commands.json
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -41,7 +41,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES SOVERSION ${PROJECT_VERSION_MAJ
 
 add_custom_target(
 	${PROJECT_NAME}-config ALL
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/dep/mervbot/cfg/MERVBot.INI ${CMAKE_CURRENT_SOURCE_DIR}/dep/mervbot/cfg/Commands.txt ${CMAKE_CURRENT_SOURCE_DIR}/dep/mervbot/cfg/Operators.txt $<TARGET_FILE_DIR:${PROJECT_NAME}>
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/cfg/AI.ini ${CMAKE_CURRENT_SOURCE_DIR}/dep/mervbot/cfg/MERVBot.INI ${CMAKE_CURRENT_SOURCE_DIR}/dep/mervbot/cfg/Commands.txt ${CMAKE_CURRENT_SOURCE_DIR}/dep/mervbot/cfg/Operators.txt $<TARGET_FILE_DIR:${PROJECT_NAME}>
     COMMENT "Copying configuration files to plugin output directory..."
 )
 

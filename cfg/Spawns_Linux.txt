@@ -3,7 +3,7 @@
 #############################
 
 #Catid.Bot  :  +++++  :  0  :  alias, flag, rampage  :  mod :
-mervbot : AeWah3ANg8ce3ahj : 0 : libmervbot-plugin-template.so : staff : params
+mervbot : AeWah3ANg8ce3ahj : 0 : libbjorn-ai.so : staff : params
 
 #############################
 ##  Spawns.txt reference   ##

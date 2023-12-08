@@ -43,9 +43,70 @@ class botInfo
 	int num_objects;
 	Player *object_dest;
 
+	Player *TempPlayer;
+
 	int countdown[4];
 
+	Vector predpos;
+	Vector predvel;
+	Vector predwork;
+
+
+	struct projectiles
+	{
+		Vector pos;
+		Vector vel;
+		Vector work;
+		int speed;
+		Uint32 alivetime;
+		Uint32 lasttime;
+		bool alive;
+
+		weaponInfo wi;
+	};
+
+	projectiles proj[11000];
+
+
+	struct Warp
+	{
+	int x;
+	int y;
+	};
+
+	Warp coords[10];
+
+	int ypos;
+	int maxproj;
+	int minproj;
+
+
+	int botenergy;
+	bool botdead;
+
+	double lasthit;
+
+
+	int test;
+	bool randomspawn;
+	bool attachspawn;
+
+	int timenow;
+
+
+	//INI variables
+
+	int ship;
+	int team;
+	int x,y;
+	bool active;
+	bool shooting;
+	int spawnmode;
+	int dodgenum;
+
+
 	// Put bot data here
+
 
 public:
 	botInfo(CALL_HANDLE given)
@@ -65,6 +126,26 @@ public:
 		num_objects = 0;
 		object_dest = NULL;
 
+
+		botenergy=850;
+		botdead=0;
+
+		lasthit=0;
+
+		maxproj=0;
+		minproj=0;
+
+		ypos=0;
+
+		randomspawn=1;
+		attachspawn=0;
+
+		timenow=0;
+
+
+
+
+
 		// Put initial values here
 	}
 
@@ -77,6 +158,22 @@ public:
 	void gotEvent(BotEvent &event);
 
 	void tell(BotEvent event);
+
+	void move(Sint32 time, int proj);
+	void GetRandomPlayer();
+	void Reset();
+	void movepred(Sint32 time,Player *p);
+	BYTE Predict(Player *p, Sint32 scalar);	// use prediction
+
+	void LoadINI();
+	bool GetPilotName(String name);
+
+	BYTE TriangulateFireAngle(const Vector &rel);
+	BYTE TriangulateFireAngle(const Vector &pos, const Vector &vel, Sint32 scalar);
+	BYTE oppositeDirection(BYTE d);
+
+
+	void sendFreqs(char *msg);
 
 	bool validate(CALL_HANDLE given) { return given == handle; }
 

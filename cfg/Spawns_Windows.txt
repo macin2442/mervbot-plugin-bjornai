@@ -3,7 +3,7 @@
 #############################
 
 #Catid.Bot  :  +++++  :  0  :  alias, flag, rampage  :  mod :
-mervbot : AeWah3ANg8ce3ahj : 0 : mervbot-plugin-template.dll : staff : params
+mervbot : AeWah3ANg8ce3ahj : 0 : bjorn-ai.dll : staff : params
 
 #############################
 ##  Spawns.txt reference   ##
