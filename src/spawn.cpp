@@ -279,7 +279,7 @@ bool botInfo::GetPilotName(String name)
 		// in freq data
 		if (name==compare)
 		{
-			me->target = p;
+			target = p;
 			return true;
 		}
 
@@ -341,12 +341,12 @@ void botInfo::gotEvent(BotEvent &event)
 			{
 				if (countdown[1]<-8)
 				{
-					if (me->dead && !botdead)
+					if (dead && !botdead)
 					{
 						if (me->bounty<=0)
 							me->bounty=50;
-						tell(makeDeath(me->proj[me->killer].shooter));
-						//tell(makePlayerDeath(me, me->proj[me->killer].shooter, 50, 0));
+						tell(makeDeath(proj[killer].shooter));
+						//tell(makePlayerDeath(me, proj[killer].shooter, 50, 0));
 						me->energy=0;
 						int delay=(settings->EnterDelay/100)+3;
 						countdown[1]=delay;
@@ -370,7 +370,7 @@ void botInfo::gotEvent(BotEvent &event)
 				if (countdown[1]==0)
 				{
 					botdead=0;
-					me->dead=0;
+					dead=0;
 					botenergy=settings->ships[me->ship].InitialEnergy;
 					me->energy=botenergy;
 				}
@@ -522,12 +522,12 @@ void botInfo::gotEvent(BotEvent &event)
 
 			try
 			{
-				if (me->dead && !botdead)
+				if (dead && !botdead)
 				{
 					if (me->bounty<=0)
 						me->bounty=50;
-					tell(makeDeath(me->proj[me->killer].shooter));
-					//tell(makePlayerDeath(me, me->proj[me->killer].shooter, 50, 0));
+					tell(makeDeath(proj[killer].shooter));
+					//tell(makePlayerDeath(me, proj[killer].shooter, 50, 0));
 					me->energy=0;
 					int delay=(settings->EnterDelay/100)+3;
 					countdown[1]=delay;
@@ -554,7 +554,7 @@ void botInfo::gotEvent(BotEvent &event)
 				if (dist < 3000 && !botdead)
 				{
 					if (dist<900)
-						me->shooting=1;
+						shooting=1;
 
 					Vector bullet;
 					int tempd = p->d;
@@ -589,17 +589,17 @@ void botInfo::gotEvent(BotEvent &event)
 							bullet.y = settings->ships[p->ship].BombSpeed * sin(Deg2Rad(degree));
 						}
 
-						if (me->maxproj>8000000)
-							me->maxproj=0;
-						if (me->minproj>8000000)
-							me->minproj=0;
+						if (maxproj>8000000)
+							maxproj=0;
+						if (minproj>8000000)
+							minproj=0;
 
 						if (doublebullets==1)
 						{
-							me->proj[me->maxproj].pos.x=p->pos.x;
-							me->proj[me->maxproj].pos.y=p->pos.y;
-							me->proj[me->maxproj].work.x=p->work.x;
-							me->proj[me->maxproj].work.y=p->work.y;
+							proj[maxproj].pos.x=p->pos.x;
+							proj[maxproj].pos.y=p->pos.y;
+							proj[maxproj].work.x=p->work.x;
+							proj[maxproj].work.y=p->work.y;
 						}
 						else
 						{
@@ -613,46 +613,46 @@ void botInfo::gotEvent(BotEvent &event)
 							tempwork += (temp * 1000);
 							temppos = tempwork / 1000;
 
-							me->proj[me->maxproj].pos.x=temppos.x;
-							me->proj[me->maxproj].pos.y=temppos.y;
-							me->proj[me->maxproj].work.x=tempwork.x;
-							me->proj[me->maxproj].work.y=tempwork.y;
+							proj[maxproj].pos.x=temppos.x;
+							proj[maxproj].pos.y=temppos.y;
+							proj[maxproj].work.x=tempwork.x;
+							proj[maxproj].work.y=tempwork.y;
 						}
 
 						if ((wi.type==5) || ((wi.type==3 || wi.type==4) && wi.fireType==1))
 						{
-							me->proj[me->maxproj].vel.x=0;
-							me->proj[me->maxproj].vel.y=0;
+							proj[maxproj].vel.x=0;
+							proj[maxproj].vel.y=0;
 						}
 						else
 						{
-							me->proj[me->maxproj].vel.x=p->vel.x;
-							me->proj[me->maxproj].vel.y=p->vel.y;
-							me->proj[me->maxproj].vel+=bullet;
+							proj[maxproj].vel.x=p->vel.x;
+							proj[maxproj].vel.y=p->vel.y;
+							proj[maxproj].vel+=bullet;
 						}
 
 						if (wi.type==1 || wi.type==2)
-							me->proj[me->maxproj].speed=settings->ships[p->ship].BulletSpeed;
+							proj[maxproj].speed=settings->ships[p->ship].BulletSpeed;
 						else if (wi.type==3 || wi.type==4)
 						{
-							me->proj[me->maxproj].speed=settings->ships[p->ship].BombSpeed;
-							me->proj[me->maxproj].bounceCount=settings->ships[p->ship].BombBounceCount;
+							proj[maxproj].speed=settings->ships[p->ship].BombSpeed;
+							proj[maxproj].bounceCount=settings->ships[p->ship].BombBounceCount;
 						}
-						me->proj[me->maxproj].alivetime=getTime();
-						me->proj[me->maxproj].lasttime=getTime();
-						me->proj[me->maxproj].alive=true;
-						me->proj[me->maxproj].shooter=p;
-						me->proj[me->maxproj].type=wi.type;
-						me->proj[me->maxproj].bouncing=wi.bouncing;
-						me->proj[me->maxproj].level=wi.level;
-						me->proj[me->maxproj].emp=wi.emp;
-						me->proj[me->maxproj].fireType=wi.fireType;
+						proj[maxproj].alivetime=getTime();
+						proj[maxproj].lasttime=getTime();
+						proj[maxproj].alive=true;
+						proj[maxproj].shooter=p;
+						proj[maxproj].type=wi.type;
+						proj[maxproj].bouncing=wi.bouncing;
+						proj[maxproj].level=wi.level;
+						proj[maxproj].emp=wi.emp;
+						proj[maxproj].fireType=wi.fireType;
 						if (p->team == me->team)
-							me->proj[me->maxproj].hostile=0;
+							proj[maxproj].hostile=0;
 						else
-							me->proj[me->maxproj].hostile=1;
+							proj[maxproj].hostile=1;
 
-						me->maxproj++;
+						maxproj++;
 					}
 
 					//DODGE PREDICTION
@@ -668,17 +668,17 @@ void botInfo::gotEvent(BotEvent &event)
 					{
 						if (getTime() - timenow < 100 && dist < 700)
 						{
-							me->hits++;
+							hits++;
 						}
 						else if (dist < 700)
 						{
-							me->hits=1;
+							hits=1;
 							timenow=getTime();
 						}
 
-						if (me->hits >= dodgenum && !me->dodge)
+						if (hits >= dodgenum && !dodge)
 						{
-							me->dodge=1;
+							dodge=1;
 						}
 					}
 				}

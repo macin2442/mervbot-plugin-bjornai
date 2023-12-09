@@ -170,19 +170,19 @@ void botInfo::gotCommand(Player *p, Command *c)
 		{	// Limited-level commands
 			if (c->check("active0"))
 			{
-				me->active = 0;
+				active = 0;
 			}
 			if (c->check("active1"))
 			{
-				me->active = 1;
+				active = 1;
 			}
 			if (c->check("shoot0"))
 			{
-				me->shooting = 0;
+				shooting = 0;
 			}
 			if (c->check("shoot1"))
 			{
-				me->shooting = 1;
+				shooting = 1;
 			}
 			if (c->check("target"))
 			{
@@ -195,7 +195,7 @@ void botInfo::gotCommand(Player *p, Command *c)
 				else
 				{
 				sendPrivate(p,"Target not found!");
-				me->target=NULL;
+				target=NULL;
 				}*/
 
 				sendPrivate(p, "This command is disabled");
@@ -232,13 +232,10 @@ void botInfo::gotCommand(Player *p, Command *c)
 			if (c->check("start"))
 			{
 				LoadINI();
-				// me->target=NULL;
+				// target=NULL;
 
 				tell(makeShip((ship - 1)));
 				tell(makeTeam(team));
-
-				me->active = active;
-				me->shooting = shooting;
 
 				if (spawnmode == 1)
 				{

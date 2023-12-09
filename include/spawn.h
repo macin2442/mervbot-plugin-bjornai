@@ -51,7 +51,7 @@ class botInfo
 	Vector predvel;
 	Vector predwork;
 
-
+	/*
 	struct projectiles
 	{
 		Vector pos;
@@ -63,6 +63,32 @@ class botInfo
 		bool alive;
 
 		weaponInfo wi;
+	};
+	*/
+
+	struct projectiles
+	{
+		Vector pos;
+		Vector vel;
+		Vector work;
+		int speed;
+		Uint32 alivetime;
+		Uint32 lasttime;
+		bool alive;
+		Player *shooter;
+
+		int type;
+		int level;
+		bool emp;
+		bool bouncing;
+		int fireType;
+
+		int bounceCount;
+		int bounceTile;
+
+		int proxTime;
+		bool proxTrig;
+		bool hostile;
 	};
 
 	projectiles proj[11000];
@@ -77,8 +103,8 @@ class botInfo
 	Warp coords[10];
 
 	int ypos;
-	int maxproj;
-	int minproj;
+	int maxproj{0};
+	int minproj{0};
 
 
 	int botenergy;
@@ -106,6 +132,12 @@ class botInfo
 
 
 	// Put bot data here
+
+	bool dead{false};
+	int killer;
+	bool dodge;
+	int hits;
+	Player *target;
 
 
 public:
